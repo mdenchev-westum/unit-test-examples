@@ -6,7 +6,7 @@ let proxyquire = require('proxyquire').noCallThru();
 
 let MailService = require('../../lib/mail');
 
-let sendSpy = sinon.spy();
+let sendSpy = sinon.fake();
 
 class MailServiceMock extends MailService {
 	send() {
@@ -27,6 +27,16 @@ describe('order', function () {
 			order.place();
 
 			expect(sendSpy.called).to.be.true;
+		});
+
+		it('should get the same value as it was set', function () {
+			let order = new Order();
+			let spy = sinon.spy(order,'getAmount');
+
+			order.setAmount(9.99);
+			order.place();
+
+			expect(spy.returnValues[0]).to.be.equal(9.99);
 		});
 
 		it('should call and settle payment', function () {
