@@ -69,7 +69,7 @@ describe('paging', function () {
 		it('should call cache', function () {
 			let cacheDummy = {
 				put: () => {
-					console.log('Cache item to Redis');
+					//console.log('Cache item to Redis');
 				}
 			}
 
@@ -78,9 +78,6 @@ describe('paging', function () {
 			let result = paging(100, 10, 10, cacheDummy);
 
 			assert.equal(spy.called, true);
-
-			console.log(spy.args);
-			
 		});
 	});
 
